@@ -65,6 +65,9 @@ func FetchUsers(tableName string, dynaClient dynamodbiface.DynamoDBAPI) (*[]User
 
 	item := new([]User)
 	err = dynamodbattribute.UnmarshalListOfMaps(result.Items, item)
+	if err != nil {
+		return nil, errors.New(ErrorFailedToUnmarshalRecord)
+	}
 	return item, nil
 
 }
